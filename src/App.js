@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
 import Login from "./Pages/Login";
@@ -22,7 +22,6 @@ const App = () => {
 
   //   A Mock DataBase
   const [data, setData] = React.useState([]);
-  const [msgpopup, setMsgpopup] = React.useState({});
   const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
@@ -53,25 +52,28 @@ const App = () => {
   };
 
   const isValid = () => {
-    let N = data.find((item) => item.email === emailLogin);
+    let N = data.findIndex((item) => item.email === emailLogin);
     console.log(N);
 
     if (emailLogin.length > 0 && passwordLogin.length > 0) {
-      if (N) {
-        if (passwordLogin === N.password && roleLogin === N.role) {
-          setMsgpopup({ type: "success", text: "login successfullly" });
+      if (emailLogin === data.map((item) => item.email)[N]) {
+        if (
+          passwordLogin === data.map((item) => item.password)[N] &&
+          roleLogin === data.map((item) => item.role)[N]
+        ) {
+          handleAlert({ type: "success", text: "login successfullly" });
           return true;
         } else {
-          setMsgpopup({ type: "danger", text: "wrong password" });
+          handleAlert({ type: "danger", text: "wrong password" });
           return false;
         }
       } else {
-        setMsgpopup({ type: "danger", text: "user not found" });
+        handleAlert({ type: "danger", text: "user not found" });
 
         return false;
       }
     } else {
-      setMsgpopup({ type: "danger", text: "enter valid inputs" });
+      handleAlert({ type: "danger", text: "enter valid inputs" });
 
       return false;
     }
@@ -79,7 +81,6 @@ const App = () => {
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    handleAlert(msgpopup);
     if (isValid()) {
       localStorage.setItem("user", true);
       localStorage.setItem("email", emailLogin);
