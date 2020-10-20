@@ -27,7 +27,7 @@ const App = () => {
 
   React.useEffect(() => {
     async function getdata() {
-      const response = await fetch("http://localhost:3002/user");
+      const response = await fetch("http://localhost:3001/user");
       const data = await response.json();
       setData(data);
     }
@@ -125,7 +125,7 @@ const App = () => {
             role: roleRegister,
           }),
         };
-        fetch("http://localhost:3002/user", requestOptions)
+        fetch("http://localhost:3001/user", requestOptions)
           .then((response) => response.json())
           .then((data) => console.log(data));
         handleAlert({ type: "success", text: "Your Login Has Been Created" });
