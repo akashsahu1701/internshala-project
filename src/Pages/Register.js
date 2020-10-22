@@ -38,7 +38,7 @@ const Register = ({
         <br />
         Already a User ??
         <br />
-        <button className="button">
+        <button type="button" className="button">
           <Link to="/">
             <span>Login</span>
           </Link>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
 import Login from "./Pages/Login";
@@ -174,7 +174,7 @@ const App = () => {
             handleSubmitRegister={handleSubmitRegister}
           />
         </Route>
-        <Route exact path="/landing">
+        <Route path="/landing">
           <LandingPage logout={logout} />
         </Route>
       </Router>
